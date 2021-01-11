@@ -1,0 +1,19 @@
+{
+  "name": "athena_event",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zain-Muiz/athena_event.git"
+  },
+  "author": "Zain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zain-Muiz/athena_event/issues"
+  },
+  "homepage": "https://github.com/Zain-Muiz/athena_event#readme"
+}
