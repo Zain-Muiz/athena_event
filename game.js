@@ -67,13 +67,42 @@ var onSnapEnd = function () {
     board.position(game.fen());
 };
 
-var cfg = {
-    draggable: true,
-    position: 'start',
-    onDragStart: onDragStart,
-    onDrop: onDrop,
-    onMouseoutSquare: onMouseoutSquare,
-    onMouseoverSquare: onMouseoverSquare,
-    onSnapEnd: onSnapEnd
-};
-board = ChessBoard('board', cfg);
+socket.on('player', (msg) => {
+ 
+    var plno = document.getElementById('player')
+    
+    // we're passing an object -
+    // { playerId, players, color, roomId } as msg
+    color = msg.color;
+    
+    // show the players number and color in the player div
+    players = msg.players;
+    plno.innerHTML = 'Player ' + players + " : " + color;
+    
+    // emit the play event when 2 players have joined
+    if(players == 2){
+      play = false;
+      // relay it to the other player that is in the room
+      socket.emit('play', msg.roomId);
+      // change the state from 'join room' to -
+      state.innerHTML = "Game in Progress"
+    }
+    // if only one person is in the room
+    else
+      state.innerHTML = "Waiting for Second player";
+    
+    
+    var cfg = {
+      orientation: color,
+      draggable: true,
+      position: 'start',
+      onDragStart: onDragStart,
+      onDrop: onDrop,
+      onMouseoutSquare: onMouseoutSquare,
+      onMouseoverSquare: onMouseoverSquare,
+      onSnapEnd: onSnapEnd
+    };
+    board = ChessBoard('board', cfg);
+   });
+    
+   var board;
